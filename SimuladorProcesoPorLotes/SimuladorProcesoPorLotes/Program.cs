@@ -16,7 +16,8 @@ namespace SimuladorProcesoPorLotes
         {
             Application.EnableVisualStyles();
             main menu = new main();
-            menu.ShowDialog();
+            menu.Show();
+            menu.simulacion();
         }
     }
 }
