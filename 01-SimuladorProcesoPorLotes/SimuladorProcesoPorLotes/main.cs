@@ -40,20 +40,22 @@ namespace SimuladorProcesoPorLotes
         {
             int cont = 0;
             int sig = 0;
-            int espera=0;
-            int rest = cantidad;
+            int rest = cantidad/3;
             int total, restante;
+            int lote = 1;
+            int conto = 0;
             labelContador.Text = sig.ToString();
+            /*if (cantidad % 3 != 0)
+            {
+                rest++;
+            }*/
             labelPendientes.Text = rest.ToString();
             List<Proceso> aux = new List<Proceso>();
             foreach (Proceso p in lista)
             {
-                
-                espera += p.getTime();
                 listBox1.Items.Add(p.getName() +"\t\t"+ p.getTime());
                 aux.Add(p);
-                cont++;
-                Console.WriteLine(cont % 3);
+                cont++; 
                 if ((cont % 3) == 0|| cont == cantidad) { 
                     foreach (Proceso n in aux)
                     {
@@ -69,23 +71,29 @@ namespace SimuladorProcesoPorLotes
                         for (int i = 0; i < n.getTime(); i++)
                         {
                             this.Refresh();
-                            Thread.Sleep(1300);
+                            Thread.Sleep(1200);
                             total++;
+                            conto++;
                             restante--;
                             labelTt.Text = total.ToString();
                             labelTr.Text = restante.ToString();
+                            labelContador.Text = conto.ToString();
                         }
                         listBox1.Items.RemoveAt(0);
+                        n.resolver();
+                        listBox2.Items.Add(n.getID() + " \t" + n.getOpe() + "=" + n.getResult().ToString() + "\t\t "+ lote.ToString());
                         sig++;
-                        rest--;
-                        labelContador.Text = sig.ToString();
-                        labelPendientes.Text = rest.ToString();
                     }
-                    
+                    lote++;
+                    rest--;
+                    if (rest == -1)
+                    {
+                        rest = 0;
+                    }
+                    listBox2.Items.Add("-------------------------------------------------");
+                    labelPendientes.Text = rest.ToString();
                     aux.Clear();
-                espera = 0;
                 }
-                
             }
             MessageBox.Show("Fin de Simulación");
         }

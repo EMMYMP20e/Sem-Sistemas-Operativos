@@ -17,6 +17,7 @@ namespace SimuladorProcesoPorLotes
         {
 
             InitializeComponent();
+            this.ControlBox = false;
             list = nueva;
         }
 
@@ -34,6 +35,14 @@ namespace SimuladorProcesoPorLotes
             if (!actual.esValido())
             {
                 MessageBox.Show("Operación no válida");
+            }
+            else if (textNombre.Text == "")
+            {
+                MessageBox.Show("Error: Nombre vacío");
+            }
+            else if (textID.Text == "")
+            {
+                MessageBox.Show("Error: ID vacío");
             }
             else
             {

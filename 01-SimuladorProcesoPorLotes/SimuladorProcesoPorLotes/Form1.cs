@@ -16,6 +16,7 @@ namespace SimuladorProcesoPorLotes
         public Form1()
         {
             InitializeComponent();
+            this.ControlBox = false;
         }
         public int getCantidad() { return cantidad; }
 
