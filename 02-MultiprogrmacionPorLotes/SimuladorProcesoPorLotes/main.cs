@@ -71,7 +71,7 @@ namespace SimuladorProcesoPorLotes
             List<Proceso> aux2 = new List<Proceso>();
             foreach (Proceso p in lista)
             {
-                listBox1.Items.Add(p.getName() +"\t\t"+ p.getTime()+"\t"+p.getTrans());
+                listBox1.Items.Add(p.getID() +"\t\t"+ p.getTime()+"\t"+p.getTrans());
                 aux.Add(p);
                 cont++; 
                 if ((cont % 3) == 0 || cont == cantidad) { 
@@ -123,7 +123,7 @@ namespace SimuladorProcesoPorLotes
                             {
                                 n.setTrans(total);
                                 j = n.getTime();
-                                listBox1.Items.Add(n.getName() + "\t\t" + n.getTime() + "\t" + n.getTrans());
+                                listBox1.Items.Add(n.getID() + "\t\t" + n.getTime() + "\t" + n.getTrans());
                                 aux.Add(n);
                             }
                         }

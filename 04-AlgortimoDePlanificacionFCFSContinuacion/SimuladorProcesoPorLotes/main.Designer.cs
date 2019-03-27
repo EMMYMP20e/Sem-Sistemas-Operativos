@@ -47,14 +47,18 @@
             this.labelTme = new System.Windows.Forms.Label();
             this.labelOpe = new System.Windows.Forms.Label();
             this.labelID = new System.Windows.Forms.Label();
-            this.labelNombre = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.panel14 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -78,6 +82,8 @@
             this.panel8.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel15.SuspendLayout();
+            this.panel14.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel10.SuspendLayout();
@@ -145,9 +151,9 @@
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
             this.label1.Location = new System.Drawing.Point(3, 2);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(145, 20);
+            this.label1.Size = new System.Drawing.Size(141, 20);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Lote Trabajando:";
+            this.label1.Text = "Procesos Listos:";
             // 
             // panel3
             // 
@@ -222,13 +228,11 @@
             this.panel2.Controls.Add(this.labelTme);
             this.panel2.Controls.Add(this.labelOpe);
             this.panel2.Controls.Add(this.labelID);
-            this.panel2.Controls.Add(this.labelNombre);
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.label4);
             this.panel2.Location = new System.Drawing.Point(282, 136);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(269, 327);
@@ -239,7 +243,7 @@
             this.labelTr.AutoSize = true;
             this.labelTr.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.830189F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTr.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
-            this.labelTr.Location = new System.Drawing.Point(132, 244);
+            this.labelTr.Location = new System.Drawing.Point(153, 223);
             this.labelTr.Name = "labelTr";
             this.labelTr.Size = new System.Drawing.Size(61, 17);
             this.labelTr.TabIndex = 11;
@@ -250,7 +254,7 @@
             this.labelTt.AutoSize = true;
             this.labelTt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.830189F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
-            this.labelTt.Location = new System.Drawing.Point(132, 202);
+            this.labelTt.Location = new System.Drawing.Point(153, 181);
             this.labelTt.Name = "labelTt";
             this.labelTt.Size = new System.Drawing.Size(61, 17);
             this.labelTt.TabIndex = 10;
@@ -261,7 +265,7 @@
             this.labelTme.AutoSize = true;
             this.labelTme.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.830189F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTme.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
-            this.labelTme.Location = new System.Drawing.Point(132, 162);
+            this.labelTme.Location = new System.Drawing.Point(153, 141);
             this.labelTme.Name = "labelTme";
             this.labelTme.Size = new System.Drawing.Size(61, 17);
             this.labelTme.TabIndex = 9;
@@ -272,7 +276,7 @@
             this.labelOpe.AutoSize = true;
             this.labelOpe.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.830189F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelOpe.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
-            this.labelOpe.Location = new System.Drawing.Point(132, 122);
+            this.labelOpe.Location = new System.Drawing.Point(153, 101);
             this.labelOpe.Name = "labelOpe";
             this.labelOpe.Size = new System.Drawing.Size(61, 17);
             this.labelOpe.TabIndex = 8;
@@ -283,29 +287,18 @@
             this.labelID.AutoSize = true;
             this.labelID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.830189F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
-            this.labelID.Location = new System.Drawing.Point(132, 83);
+            this.labelID.Location = new System.Drawing.Point(153, 62);
             this.labelID.Name = "labelID";
             this.labelID.Size = new System.Drawing.Size(61, 17);
             this.labelID.TabIndex = 7;
             this.labelID.Text = "label10";
-            // 
-            // labelNombre
-            // 
-            this.labelNombre.AutoSize = true;
-            this.labelNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.830189F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
-            this.labelNombre.Location = new System.Drawing.Point(132, 42);
-            this.labelNombre.Name = "labelNombre";
-            this.labelNombre.Size = new System.Drawing.Size(52, 17);
-            this.labelNombre.TabIndex = 6;
-            this.labelNombre.Text = "label9";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.830189F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
-            this.label9.Location = new System.Drawing.Point(27, 244);
+            this.label9.Location = new System.Drawing.Point(48, 223);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(34, 17);
             this.label9.TabIndex = 5;
@@ -316,7 +309,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.830189F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
-            this.label8.Location = new System.Drawing.Point(27, 202);
+            this.label8.Location = new System.Drawing.Point(48, 181);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(33, 17);
             this.label8.TabIndex = 4;
@@ -327,7 +320,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.830189F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
-            this.label7.Location = new System.Drawing.Point(27, 162);
+            this.label7.Location = new System.Drawing.Point(48, 141);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(45, 17);
             this.label7.TabIndex = 3;
@@ -338,7 +331,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.830189F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
-            this.label6.Location = new System.Drawing.Point(27, 122);
+            this.label6.Location = new System.Drawing.Point(48, 101);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 17);
             this.label6.TabIndex = 2;
@@ -349,32 +342,88 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.830189F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
-            this.label5.Location = new System.Drawing.Point(27, 83);
+            this.label5.Location = new System.Drawing.Point(48, 62);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(28, 17);
             this.label5.TabIndex = 1;
             this.label5.Text = "ID:";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.830189F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
-            this.label4.Location = new System.Drawing.Point(27, 42);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 17);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Nombre:";
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(101)))), ((int)(((byte)(114)))));
+            this.panel1.Controls.Add(this.listBox3);
+            this.panel1.Controls.Add(this.panel15);
+            this.panel1.Controls.Add(this.panel14);
             this.panel1.Controls.Add(this.panel7);
             this.panel1.Controls.Add(this.listBox1);
             this.panel1.Location = new System.Drawing.Point(-2, 136);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(278, 327);
+            this.panel1.Size = new System.Drawing.Size(278, 421);
             this.panel1.TabIndex = 6;
+            // 
+            // listBox3
+            // 
+            this.listBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox3.FormattingEnabled = true;
+            this.listBox3.ItemHeight = 20;
+            this.listBox3.Location = new System.Drawing.Point(8, 247);
+            this.listBox3.Name = "listBox3";
+            this.listBox3.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.listBox3.Size = new System.Drawing.Size(268, 164);
+            this.listBox3.TabIndex = 11;
+            // 
+            // panel15
+            // 
+            this.panel15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(85)))));
+            this.panel15.Controls.Add(this.label20);
+            this.panel15.Controls.Add(this.label21);
+            this.panel15.Location = new System.Drawing.Point(8, 215);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(267, 26);
+            this.panel15.TabIndex = 3;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
+            this.label20.Location = new System.Drawing.Point(116, 3);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(43, 17);
+            this.label20.TabIndex = 1;
+            this.label20.Text = "TTB:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
+            this.label21.Location = new System.Drawing.Point(3, 3);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(28, 17);
+            this.label21.TabIndex = 0;
+            this.label21.Text = "ID:";
+            // 
+            // panel14
+            // 
+            this.panel14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(47)))), ((int)(((byte)(52)))));
+            this.panel14.Controls.Add(this.label4);
+            this.panel14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(47)))), ((int)(((byte)(52)))));
+            this.panel14.Location = new System.Drawing.Point(7, 190);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(270, 27);
+            this.panel14.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.86792F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
+            this.label4.Location = new System.Drawing.Point(3, 2);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 20);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Bloqueado:";
             // 
             // panel7
             // 
@@ -428,7 +477,7 @@
             this.listBox1.Location = new System.Drawing.Point(7, 34);
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBox1.Size = new System.Drawing.Size(268, 284);
+            this.listBox1.Size = new System.Drawing.Size(268, 164);
             this.listBox1.TabIndex = 0;
             // 
             // label10
@@ -461,9 +510,9 @@
             this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
             this.label11.Location = new System.Drawing.Point(5, 3);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(192, 17);
+            this.label11.Size = new System.Drawing.Size(169, 17);
             this.label11.TabIndex = 14;
-            this.label11.Text = "No. de Lotes Pendientes:";
+            this.label11.Text = "No. Procesos Nuevos:";
             // 
             // labelPendientes
             // 
@@ -487,7 +536,7 @@
             // 
             this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(101)))), ((int)(((byte)(114)))));
             this.panel9.Controls.Add(this.labelContador);
-            this.panel9.Location = new System.Drawing.Point(155, 469);
+            this.panel9.Location = new System.Drawing.Point(410, 492);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(62, 35);
             this.panel9.TabIndex = 16;
@@ -496,7 +545,7 @@
             // 
             this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(85)))));
             this.panel10.Controls.Add(this.label10);
-            this.panel10.Location = new System.Drawing.Point(59, 469);
+            this.panel10.Location = new System.Drawing.Point(314, 492);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(93, 35);
             this.panel10.TabIndex = 17;
@@ -531,18 +580,18 @@
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Arial Narrow", 19.69811F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(170)))), ((int)(((byte)(51)))));
-            this.label17.Location = new System.Drawing.Point(120, 28);
+            this.label17.Location = new System.Drawing.Point(223, 31);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(636, 33);
+            this.label17.Size = new System.Drawing.Size(392, 33);
             this.label17.TabIndex = 0;
-            this.label17.Text = "Simulador de Multiprogramación en proceso por lotes";
+            this.label17.Text = "Algortimo De Planificación FCFS";
             // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Teal;
-            this.ClientSize = new System.Drawing.Size(860, 516);
+            this.ClientSize = new System.Drawing.Size(860, 569);
             this.Controls.Add(this.panel13);
             this.Controls.Add(this.panel12);
             this.Controls.Add(this.panel11);
@@ -556,6 +605,7 @@
             this.Controls.Add(this.panel1);
             this.KeyPreview = true;
             this.Name = "main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "main";
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.main_KeyPress);
             this.panel6.ResumeLayout(false);
@@ -570,6 +620,10 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel15.ResumeLayout(false);
+            this.panel15.PerformLayout();
+            this.panel14.ResumeLayout(false);
+            this.panel14.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel9.ResumeLayout(false);
@@ -603,14 +657,12 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label labelTr;
         private System.Windows.Forms.Label labelTt;
         private System.Windows.Forms.Label labelTme;
         private System.Windows.Forms.Label labelOpe;
         private System.Windows.Forms.Label labelID;
-        private System.Windows.Forms.Label labelNombre;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label labelContador;
         private System.Windows.Forms.Label label11;
@@ -630,5 +682,11 @@
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.Panel panel15;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Panel panel14;
+        private System.Windows.Forms.Label label4;
     }
 }
