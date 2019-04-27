@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoundRobin", "SimuladorProcesoPorLotes\RoundRobin.csproj", "{E7AC495D-C745-4A83-84B6-0AA9CC1F1095}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06-ProductorConsumidor", "06-ProductorConsumidor\06-ProductorConsumidor.csproj", "{DA9DCF6B-4F61-4C72-B134-6F4E95A6FCEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E7AC495D-C745-4A83-84B6-0AA9CC1F1095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7AC495D-C745-4A83-84B6-0AA9CC1F1095}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7AC495D-C745-4A83-84B6-0AA9CC1F1095}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7AC495D-C745-4A83-84B6-0AA9CC1F1095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA9DCF6B-4F61-4C72-B134-6F4E95A6FCEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA9DCF6B-4F61-4C72-B134-6F4E95A6FCEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA9DCF6B-4F61-4C72-B134-6F4E95A6FCEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA9DCF6B-4F61-4C72-B134-6F4E95A6FCEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4524C181-38E1-4E79-8BF5-1956495A4E6F}
+		SolutionGuid = {C6958F69-92BF-48A7-80C8-9BB6A076C96A}
 	EndGlobalSection
 EndGlobal

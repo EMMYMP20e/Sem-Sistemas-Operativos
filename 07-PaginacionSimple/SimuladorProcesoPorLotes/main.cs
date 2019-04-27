@@ -25,15 +25,223 @@ namespace SimuladorProcesoPorLotes
         List<Proceso> aux;
         List<Proceso> bloqueados;
         List<Proceso> terminados;
-        List<Proceso> all;
+        List<Proceso> all= new List<Proceso>();
         public main()
         {
             inicio();
             procesos();
             InitializeComponent();
+            cargaTabla();
             CheckForIllegalCrossThreadCalls = false;
             hilo = new Thread(new ThreadStart(procesado));
             simulacion();
+        }
+        private void cargaTabla()
+        {
+            ListViewItem id;
+            
+            for (int i = 0; i <= 35; i++)
+            {
+                
+                id = new ListViewItem(i.ToString());
+                if (i % 2 == 0)
+                {
+                    
+                    listView1.Items.Add(id);
+                }
+                else
+                {
+                    listView2.Items.Add(id);
+                }
+            }
+            foreach (ListViewItem l in listView1.Items)
+            {
+                //l.UseItemStyleForSubItems = false;
+                for (int i = 0; i < 6; i++)
+                {
+                    l.SubItems.Add("");
+                }
+            }
+            foreach (ListViewItem l in listView2.Items)
+            {
+                //l.UseItemStyleForSubItems = false;
+                for (int i = 0; i < 6; i++)
+                {
+                    l.SubItems.Add("");
+                }
+            }
+            for (int j = 0; j < 18; j++)
+            {
+                listView1.Items[j].UseItemStyleForSubItems = false;
+                for (int i = 0; i < 7; i++)
+                {
+                    listView1.Items[j].SubItems[i].BackColor = Color.White;
+                }
+            }
+            for (int j = 0; j < 18; j++)
+            {
+                listView2.Items[j].UseItemStyleForSubItems = false;
+                for (int i = 0; i < 7; i++)
+                {
+                    listView2.Items[j].SubItems[i].BackColor = Color.White;
+                }
+            }
+            id = new ListViewItem("0");
+            for (int i = 0; i < 6; i++)
+            {
+                id.SubItems.Add("");
+            }
+            for (int i = 1; i < 6; i++)
+            {
+                id.SubItems[i].BackColor = Color.Black;
+            }
+            id.UseItemStyleForSubItems = false;
+            listView1.Items[0] = id;
+            id = new ListViewItem("1");
+            for (int i = 0; i < 6; i++)
+            {
+                id.SubItems.Add("");
+            }
+            for (int i = 1; i < 6; i++)
+            {
+                id.SubItems[i].BackColor = Color.Black;
+            }
+            id.UseItemStyleForSubItems = false;
+            listView2.Items[0] = id;
+            listView1.Items[0].SubItems[6].Text = "SO";
+            listView2.Items[0].SubItems[6].Text = "SO";
+            /*pintaTabla(12, Color.Blue, 1);
+            pintaTabla(13, Color.Purple, 2);
+            pintaTabla(15, Color.Yellow, 3);
+            //Console.WriteLine(listView1.Items[1].SubItems[1].BackColor);
+            if (listView1.Items[1].SubItems[1].BackColor == Color.White)
+            {
+                Console.WriteLine("gg");
+            }*/
+
+        }
+        private bool isAvailable(int size)
+        {
+            int count=0;
+            foreach (ListViewItem l in listView1.Items)
+            {
+                if (l.SubItems[1].BackColor == Color.White)
+                {
+                    count+=5;
+                }
+                if (count >= size)
+                {
+                    return true;
+                }
+            }
+            foreach (ListViewItem l in listView2.Items)
+            {
+                if (l.SubItems[1].BackColor == Color.White)
+                {
+                    count += 5;
+                }
+                if (count >= size)
+                {
+                    return true;
+                }
+            }
+            return false;
+            
+        }
+        private void pintaTabla(int size, Color color, string id)
+        {
+            int count = 0;
+
+            foreach (ListViewItem l in listView1.Items)
+            {
+                if (l.SubItems[1].BackColor == Color.White)
+                {
+                    int i = 1;
+                    while (i < 6 && count != size)
+                    {
+                        l.SubItems[i].BackColor = color;
+                        count++;
+                        i++;
+                    }
+                    l.SubItems[6].Text = id;
+                    if (count == size)
+                    {
+                        return;
+                    }
+                }
+            }
+            foreach (ListViewItem l in listView2.Items)
+            {
+                if (l.SubItems[1].BackColor == Color.White)
+                {
+                    int i = 1;
+                    while (i < 6 && count != size)
+                    {
+                        l.SubItems[i].BackColor = color;
+                        count++;
+                        i++;
+                    }
+                    l.SubItems[6].Text = id;
+                    if (count == size)
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+        private void limpiaTabla(string id)
+        {
+            foreach (ListViewItem l in listView1.Items)
+            {
+                if (l.SubItems[6].Text == id)
+                {
+                    for (int i = 1; i < 6; i++)
+                    {
+                        l.SubItems[i].BackColor = Color.White;
+                    }
+                    l.SubItems[6].Text = "";
+                }
+            }
+            foreach (ListViewItem l in listView2.Items)
+            {
+                if (l.SubItems[6].Text == id)
+                {
+                    for (int i = 1; i < 6; i++)
+                    {
+                        l.SubItems[i].BackColor = Color.White;
+                    }
+                    l.SubItems[6].Text = "";
+                }
+            }
+        }
+        private void ActualizaColor(Color color, string id)
+        {
+            foreach (ListViewItem l in listView1.Items)
+            {
+                if (l.SubItems[6].Text == id)
+                {
+                    for (int i = 1; i < 6; i++)
+                    {
+                        if (l.SubItems[i].BackColor != Color.White)
+                        {
+                            l.SubItems[i].BackColor = color;
+                        }
+                    }
+                }
+            }
+            foreach (ListViewItem l in listView2.Items)
+            {
+                if (l.SubItems[6].Text == id)
+                {
+                    for (int i = 1; i < 6; i++)
+                    {
+                        if (l.SubItems[i].BackColor != Color.White)
+                        {
+                            l.SubItems[i].BackColor = color;
+                        }
+                    }
+                }
+            }
         }
         private void inicio()
         {
@@ -60,11 +268,11 @@ namespace SimuladorProcesoPorLotes
             int rDos = r.Next(1, 9);
             int rOpe = r.Next(0, 4);
             int rTime = r.Next(7, 18);
+            int rSize = r.Next(6, 30);
             string ecuacion = rUno.ToString() + opes[rOpe] + rDos.ToString();
-            Proceso proc = new Proceso((i + 1).ToString(), ecuacion, rTime);
+            Proceso proc = new Proceso((i + 1).ToString(), ecuacion, rTime,rSize);
             lista.Add(proc);
         }
-
 
         public void simulacion()
         {
@@ -124,19 +332,37 @@ namespace SimuladorProcesoPorLotes
 
             Proceso p;
             Proceso nP;
+            Proceso next;
             while (lista.Count != 0)
             {
+                
                 p = lista.First<Proceso>();
-                listBox1.Items.Add(p.getID() + "\t\t" + p.getTime() + "\t" + p.getTrans());
-                p.setLlegada(conto);
-                aux.Add(p);
-                cont++;
-                tres++;
-                rest--;
-                labelPendientes.Text = rest.ToString();
+                next = p;
+                if (isAvailable(p.getSize()))
+                {
+                    pintaTabla(p.getSize(), Color.Blue, p.getID());
+                    listBox1.Items.Add(p.getID() + "\t\t" + p.getTime() + "\t" + p.getTrans());
+                    p.setLlegada(conto);
+                    aux.Add(p);
+                    cont++;
+                    rest--;
+                    labelPendientes.Text = rest.ToString();
+                    if (p == lista.Last<Proceso>())
+                    {
+                        labelIDsig.Text = "";
+                        labelSize.Text = "";
+                    }
+                    else
+                    {
+                        next = lista.ElementAt<Proceso>(1);
+                        labelIDsig.Text = next.getID().ToString();
+                        labelSize.Text = next.getSize().ToString();
+                    }
+                }
 
-
-                while (tres == 3 || cont == cantidad)
+                
+                //while (tres == 3 || cont == cantidad)
+                while (!isAvailable(next.getSize()) || cont == cantidad)
                 {
                     while (aux.Count == 0)
                     {
@@ -189,6 +415,7 @@ namespace SimuladorProcesoPorLotes
                             }
                             for (int k = 0; k < cDelete; k++)
                             {
+                                ActualizaColor(Color.Blue, bloqueados.ElementAt<Proceso>(k).getID());///what
                                 bloqueados.RemoveAt(k);
                             }
                         }
@@ -196,21 +423,34 @@ namespace SimuladorProcesoPorLotes
                         labelContador.Text = conto.ToString();
                         if (nuevo)
                         {
-                            if (tres == 3)
+                            if (lista.Count>2)
                             {
-                                //rest++;
                                 labelPendientes.Text = rest.ToString();
                             }
                             else
                             {
                                 nP = lista.Last<Proceso>();
-                                listBox1.Items.Add(nP.getID() + "\t\t" + nP.getTime() + "\t" + nP.getTrans());
-                                nP.setLlegada(conto);
-                                aux.Add(nP);
-                                tres++;
-                                cont++;
-                                rest--;
-                                lista.RemoveAt(lista.Count - 1);
+                                next = nP;
+                                if (isAvailable(nP.getSize()))
+                                {
+                                    pintaTabla(nP.getSize(), Color.Blue, nP.getID());
+                                    listBox1.Items.Add(nP.getID() + "\t\t" + nP.getTime() + "\t" + nP.getTrans());
+                                    nP.setLlegada(conto);
+                                    aux.Add(nP);
+                                    cont++;
+                                    rest--;
+                                    lista.RemoveAt(lista.Count - 1);
+                                    labelPendientes.Text = rest.ToString();
+                                    labelIDsig.Text = "";
+                                    labelSize.Text = "";
+                                }
+                                else
+                                {
+                                    labelPendientes.Text = rest.ToString();
+                                    labelIDsig.Text = next.getID().ToString();
+                                    labelSize.Text = next.getSize().ToString();
+                                }
+                                
                             }
                             nuevo = false;
                         }
@@ -243,6 +483,7 @@ namespace SimuladorProcesoPorLotes
                         tme = 10;
                     }
                     quantumActual = 0;
+                    ActualizaColor(Color.Red, n.getID());
                     for (int j = i; j < tme; j++)
                     {
                         n.setServicio(total + 1);
@@ -260,7 +501,6 @@ namespace SimuladorProcesoPorLotes
                         }
                         else
                         {
-
                             try
                             {
                                 Thread.Sleep(Timeout.Infinite);
@@ -291,12 +531,14 @@ namespace SimuladorProcesoPorLotes
                         {
                             servicioTranscurrido = j;
                             j = n.getTime();
+                            limpiaTabla(n.getID());
                         }
                         if (interrupt)
                         {
                             n.setTrans(total);
                             j = n.getTime();
                             bloqueados.Add(n);
+                            ActualizaColor(Color.Purple, n.getID());
                         }
                         else
                         {
@@ -310,26 +552,42 @@ namespace SimuladorProcesoPorLotes
                                     listBox1.Items.Add(n.getID() + "\t\t" + n.getTime() + "\t" + n.getTrans());
                                     aux.Add(n);
                                     finQuantum = true;
+                                    ActualizaColor(Color.Blue, n.getID());
                                 }
                             }
                         }
                         if (nuevo)
                         {
-                            if (tres == 3)
+                            //Console.WriteLine(lista.Count);
+                            if (lista.Count > 2)
                             {
-                                //rest++;
                                 labelPendientes.Text = rest.ToString();
+                                //Console.WriteLine("g");
                             }
                             else
                             {
                                 nP = lista.Last<Proceso>();
-                                listBox1.Items.Add(nP.getID() + "\t\t" + nP.getTime() + "\t" + nP.getTrans());
-                                nP.setLlegada(conto);
-                                aux.Add(nP);
-                                tres++;
-                                cont++;
-                                rest--;
-                                lista.RemoveAt(lista.Count - 1);
+                                next = nP;
+                                if (isAvailable(nP.getSize()))
+                                {
+                                    pintaTabla(nP.getSize(), Color.Blue, nP.getID());
+                                    listBox1.Items.Add(nP.getID() + "\t\t" + nP.getTime() + "\t" + nP.getTrans());
+                                    nP.setLlegada(conto);
+                                    aux.Add(nP);
+                                    cont++;
+                                    rest--;
+                                    lista.RemoveAt(lista.Count - 1);
+                                    labelPendientes.Text = rest.ToString();
+                                    labelIDsig.Text = "";
+                                    labelSize.Text = "";
+                                }
+                                else
+                                {
+                                    labelPendientes.Text = rest.ToString();
+                                    labelIDsig.Text = next.getID().ToString();
+                                    labelSize.Text = next.getSize().ToString();
+                                }
+
                             }
                             nuevo = false;
                         }
@@ -355,11 +613,13 @@ namespace SimuladorProcesoPorLotes
                             }
                             for (int k = 0; k < cDelete; k++)
                             {
+                                ActualizaColor(Color.Blue, bloqueados.ElementAt<Proceso>(k).getID());
+                                
                                 bloqueados.RemoveAt(k);
-
+                                
                             }
                         }
-                        if (bloqueados.Count == 3 || (bloqueados.Count + listBox2.Items.Count) == cantidad)
+                        if ((bloqueados.Count + listBox2.Items.Count) == cantidad)
                         {
                             labelID.Text = "";
                             labelOpe.Text = "";
@@ -384,7 +644,7 @@ namespace SimuladorProcesoPorLotes
                             if (bloqueados.Count != 3 && (bloqueados.Count + listBox2.Items.Count) != cantidad)
                             {
                                 listBox2.Items.Add(n.getID() + " \t" + n.getOpe() + "\t\tError");
-                                tres--;
+                                //tres--;
                                 error = false;
                                 n.setFinalizacion(conto);
                                 n.setError();
@@ -395,12 +655,12 @@ namespace SimuladorProcesoPorLotes
                         }
                         else
                         {
-                            tres--;
+                            //tres--;
                             n.setFinalizacion(conto);
                             n.setServicio(n.getTime());
                             n.resolver();
                             terminados.Add(n);
-
+                            limpiaTabla(n.getID());
                             listBox2.Items.Add(n.getID() + " \t" + n.getOpe() + "\t\t" + n.getResult().ToString());
 
                         }
@@ -419,7 +679,10 @@ namespace SimuladorProcesoPorLotes
             labelTme.Text = "";
             labelTt.Text = "";
             labelTr.Text = "";
-            all.Clear();
+            if (all.Count != 0)
+            {
+                all.Clear();
+            }
             foreach (Proceso v in terminados)
             {
                 v.setEstado(3);
@@ -442,6 +705,7 @@ namespace SimuladorProcesoPorLotes
                 case 'i':
                     interrupt = true;
                     break;
+                case 'm':
                 case 'p':
                     pause = true;
                     break;
