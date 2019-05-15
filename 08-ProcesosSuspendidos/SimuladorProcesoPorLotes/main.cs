@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.IO;
+using System.Text;
 
 namespace SimuladorProcesoPorLotes
 {
@@ -17,10 +19,12 @@ namespace SimuladorProcesoPorLotes
         int cantidad;
         int quantum;
         Thread hilo;
-        bool interrupt = false, error = false, pause = false, nuevo = false, mostrar = false;
+        bool interrupt = false, error = false, pause = false, nuevo = false, mostrar = false, suspender = false, regresa=false;
         Random r = new Random(DateTime.Now.Millisecond);
         string[] opes = { "+", "-", "/", "%", "*" };
         int rest;
+        String auxFile="C:\\Users\\Emmanualto\\Desktop\\CUCEI\\Sem. Sistemas Operativos\\Sem-Sistemas-Operativos\\08-ProcesosSuspendidos\\Auxiliar.txt";
+        String suspendedFile = "C:\\Users\\Emmanualto\\Desktop\\CUCEI\\Sem. Sistemas Operativos\\Sem-Sistemas-Operativos\\08-ProcesosSuspendidos\\Suspendidos.txt";
 
         List<Proceso> aux;
         List<Proceso> bloqueados;
@@ -309,6 +313,115 @@ namespace SimuladorProcesoPorLotes
                 all.Add(p);
             }
         }
+        public void writeToDisk(Proceso p)
+        {
+            StreamWriter sw = new StreamWriter(suspendedFile, true);
+            sw.Write(p.getBloqueado());
+            sw.Write('|');
+            sw.Write(p.getError());
+            sw.Write('|');
+            sw.Write(p.getEspera());
+            sw.Write('|');
+            sw.Write(p.getEstado());
+            sw.Write('|');
+            sw.Write(p.getFinalizacion());
+            sw.Write('|');
+            sw.Write(p.getID());
+            sw.Write('|');
+            sw.Write(p.getLlegada());
+            sw.Write('|');
+            sw.Write(p.getOpe());
+            sw.Write('|');
+            sw.Write(p.getPrimera());
+            sw.Write('|');
+            sw.Write(p.getRespuesta());
+            sw.Write('|');
+            sw.Write(p.getResult());
+            sw.Write('|');
+            sw.Write(p.getServicio());
+            sw.Write('|');
+            sw.Write(p.getSize());
+            sw.Write('|');
+            sw.Write(p.getTime());
+            sw.Write('|');
+            sw.Write(p.getTrans());
+            sw.Write('\n');
+            sw.Close();
+        }
+        public bool AnySuspended()
+        {
+            string linea="";
+            try
+            {
+                StreamReader sr = new StreamReader(suspendedFile);
+                linea = sr.ReadToEnd();
+                sr.Close();
+                if (linea == "")
+                {
+                    return false;
+                }
+                return true;
+            }
+            catch (FileNotFoundException)
+            {
+                return false;
+            }
+        }
+        public Proceso readFromDisk()
+        {
+            String linea;
+            Proceso regresa = new Proceso();
+            StreamReader sr = new StreamReader(suspendedFile);
+            linea = sr.ReadLine();
+            var strs = linea.Split('|');
+            regresa.setBloqueado(Int32.Parse(strs[0]));
+            if (strs[1] == "True")
+            {
+                regresa.setError();
+            }
+            regresa.setEspera(Int32.Parse(strs[2]));
+            regresa.setEstado(Int32.Parse(strs[3]));
+            regresa.setFinalizacion(Int32.Parse(strs[4]));
+            regresa.setID(strs[5]);
+            regresa.setLlegada(Int32.Parse(strs[6]));
+            regresa.setOpe(strs[7]);
+            if (strs[8] == "True")
+            {
+                regresa.setPrimera();
+            }
+            regresa.setRespuesta(Int32.Parse(strs[9]));
+            regresa.setResult(Int32.Parse(strs[10]));
+            regresa.setServicio(Int32.Parse(strs[11]));
+            regresa.setSize(Int32.Parse(strs[12]));
+            regresa.setTime(Int32.Parse(strs[13]));
+            regresa.setTrans(Int32.Parse(strs[14]));
+            linea = sr.ReadToEnd();
+            /*var rest = linea.Split('\n');
+            List<String> listaNueva = rest.OfType<String>().ToList();
+            listaNueva.RemoveAt(0);*/
+            sr.Close();
+            return regresa;
+        }
+        public void recorreTxt()
+        {
+            string linea;
+            StreamReader sr = new StreamReader(suspendedFile);
+            linea = sr.ReadLine();
+            linea = sr.ReadToEnd();
+            sr.Close();
+            StreamWriter sw = new StreamWriter(auxFile, true);
+            /*foreach (String l in listaNueva)
+            {
+                sw.Write(l);
+                sw.Write('\n');
+                Console.WriteLine("lineas");
+            }*/
+            sw.Write(linea);
+            sw.Close();
+            File.Delete(suspendedFile);
+            File.Copy(auxFile, suspendedFile);
+            File.Delete(auxFile);
+        }
         public void procesado()
         {
             int cont = 0;
@@ -317,7 +430,6 @@ namespace SimuladorProcesoPorLotes
             int total, restante;
             int conto = 0;
             int tme;
-            int tres = 0;
             int servicioTranscurrido = 0;
             int quantumActual;
             bool finQuantum = false;
@@ -333,9 +445,23 @@ namespace SimuladorProcesoPorLotes
             Proceso p;
             Proceso nP;
             Proceso next;
-            while (lista.Count != 0)
+            while (lista.Count != 0 && !AnySuspended())
             {
-                
+                ///
+                ///
+                /*writeToDisk(p);
+                Console.WriteLine(AnySuspended());
+                if (AnySuspended())
+                {
+                    if (p.getID() == "5")
+                    {
+                        readFromDisk();
+                    }
+                    
+                }*/
+
+                ///
+                ///
                 p = lista.First<Proceso>();
                 next = p;
                 if (isAvailable(p.getSize()))
@@ -393,6 +519,47 @@ namespace SimuladorProcesoPorLotes
                                 bcp.ShowDialog();
                             }*/
                         }
+                        if (suspender)
+                        {
+                            if (bloqueados.Count > 0)
+                            {
+                                Proceso first;
+                                first = bloqueados.First<Proceso>();
+                                limpiaTabla(first.getID());
+                                bloqueados.RemoveAt(0);
+                                listBox3.Items.RemoveAt(0);
+                                writeToDisk(first);
+                                if (lista.Count > 1)
+                                {
+                                    p = lista.ElementAt<Proceso>(1);
+                                    next = p;
+                                    if (isAvailable(p.getSize()))
+                                    {
+                                        pintaTabla(p.getSize(), Color.Blue, p.getID());
+                                        listBox1.Items.Add(p.getID() + "\t\t" + p.getTime() + "\t" + p.getTrans());
+                                        p.setLlegada(conto);
+                                        aux.Add(p);
+                                        cont++;
+                                        rest--;
+                                        labelPendientes.Text = rest.ToString();
+                                        if (p == lista.Last<Proceso>())
+                                        {
+                                            labelIDsig.Text = "";
+                                            labelSize.Text = "";
+                                        }
+                                        else
+                                        {
+                                            next = lista.ElementAt<Proceso>(1);
+                                            labelIDsig.Text = next.getID().ToString();
+                                            labelSize.Text = next.getSize().ToString();
+                                        }
+                                        lista.RemoveAt(0);
+                                    }
+                                }
+                            }
+                            suspender = false;
+                        }
+
                         if (bloqueados.Count > 0)
                         {
                             listBox3.Items.Clear();
@@ -419,8 +586,26 @@ namespace SimuladorProcesoPorLotes
                                 bloqueados.RemoveAt(k);
                             }
                         }
+                        
+                        if (regresa)
+                        {
+                            if (AnySuspended())
+                            {
+                                Proceso lys;
+                                lys = readFromDisk();
+                                if (isAvailable(lys.getSize()))
+                                {
+                                    pintaTabla(lys.getSize(), Color.Blue, lys.getID());
+                                    listBox1.Items.Add(lys.getID() + "\t\t" + lys.getTime() + "\t" + lys.getTrans());
+                                    aux.Add(lys);
+                                    recorreTxt();
+                                }
+                            }
+                            regresa = false;
+                        }
                         conto++;
                         labelContador.Text = conto.ToString();
+                        
                         if (nuevo)
                         {
                             if (lista.Count>2)
@@ -556,6 +741,63 @@ namespace SimuladorProcesoPorLotes
                                 }
                             }
                         }
+                        if (suspender)
+                        {
+                            if (bloqueados.Count > 0)
+                            {
+                                Proceso first;
+                                first = bloqueados.First<Proceso>();
+                                limpiaTabla(first.getID());
+                                bloqueados.RemoveAt(0);
+                                listBox3.Items.RemoveAt(0);
+                                writeToDisk(first);
+                                if (lista.Count > 1)
+                                {
+                                    p = lista.ElementAt<Proceso>(1);
+                                    next = p;
+                                    if (isAvailable(p.getSize()))
+                                    {
+                                        pintaTabla(p.getSize(), Color.Blue, p.getID());
+                                        listBox1.Items.Add(p.getID() + "\t\t" + p.getTime() + "\t" + p.getTrans());
+                                        p.setLlegada(conto);
+                                        aux.Add(p);
+                                        cont++;
+                                        rest--;
+                                        labelPendientes.Text = rest.ToString();
+                                        if (p == lista.Last<Proceso>())
+                                        {
+                                            labelIDsig.Text = "";
+                                            labelSize.Text = "";
+                                        }
+                                        else
+                                        {
+                                            //Console.WriteLine("cc");
+                                            next = lista.ElementAt<Proceso>(1);
+                                            labelIDsig.Text = next.getID().ToString();
+                                            labelSize.Text = next.getSize().ToString();
+                                        }
+                                        lista.RemoveAt(0);
+                                    }
+                                }
+                            }
+                            suspender = false;
+                        }
+                        if (regresa)
+                        {
+                            if (AnySuspended())
+                            {
+                                Proceso lys;
+                                lys = readFromDisk();
+                                if (isAvailable(lys.getSize()))
+                                {
+                                    pintaTabla(lys.getSize(), Color.Blue, lys.getID());
+                                    listBox1.Items.Add(lys.getID() + "\t\t" + lys.getTime() + "\t" + lys.getTrans());
+                                    aux.Add(lys);
+                                    recorreTxt();
+                                }
+                            }
+                            regresa = false;
+                        }
                         if (nuevo)
                         {
                             //Console.WriteLine(lista.Count);
@@ -619,6 +861,7 @@ namespace SimuladorProcesoPorLotes
                                 
                             }
                         }
+                        
                         if ((bloqueados.Count + listBox2.Items.Count) == cantidad)
                         {
                             labelID.Text = "";
@@ -673,6 +916,7 @@ namespace SimuladorProcesoPorLotes
                     }
                 }
                 lista.RemoveAt(0);
+                //Console.WriteLine("gg");
             }
             labelID.Text = "";
             labelOpe.Text = "";
@@ -729,6 +973,12 @@ namespace SimuladorProcesoPorLotes
                     recolecta();
                     bcp = new BCP(all);
                     bcp.ShowDialog();
+                    break;
+                case 's':
+                    suspender = true;
+                    break;
+                case 'r':
+                    regresa = true;
                     break;
             }
         }

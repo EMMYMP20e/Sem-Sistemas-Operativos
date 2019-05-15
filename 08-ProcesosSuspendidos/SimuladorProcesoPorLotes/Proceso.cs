@@ -87,17 +87,34 @@ namespace SimuladorProcesoPorLotes
         {
             return error;
         }
+        public void setID(string i)
+        {
+            id = i;
+        }
         public string getID()
         {
             return id;
         }
+        public void setOpe(string o)
+        {
+            ope = o;
+        }
+
         public string getOpe()
         {
             return ope;
         }
+        public void setTime(int t)
+        {
+            time = t;
+        }
         public int getTime()
         {
             return time;
+        }
+        public void setResult(int r)
+        {
+            result = r;
         }
         public int getResult()
         {
